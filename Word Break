@@ -1,0 +1,32 @@
+int wordBreak(string word, vector<string> &dictionary) {
+        vector<int> dp(word.length(),0);
+        for(int i=0; i<word.length(); i++){
+            // cout<<i<<endl;
+            for(int j=0;j<=i;j++){
+                string temps = word.substr(j,i-j+1);
+                // if(B.find(temps)!=dictionary.end()){
+                if(find(dictionary.begin(),dictionary.end(),temps)!=dictionary.end()){
+                // cout<<temps<<endl;
+                    if(j>0){
+                        dp[i]+=dp[j-1];
+                    }
+                    else{
+                        dp[i]=1;
+                        // cout<<dp[i]<<endl;;
+                    }
+                }
+            }
+            // cout<<endl;
+        }
+        // for(auto it : dp){
+        //     cout<<it<<" ";
+        // }
+        // cout<<endl;
+    
+        // cout<<"No. of words that can be segment : "<<dp[word.length()-1]<<endl;
+    
+        if(dp[word.length()-1]>0){
+            return 1;
+        }
+        return 0;
+    }
